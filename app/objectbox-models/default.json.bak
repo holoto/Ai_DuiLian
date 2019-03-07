@@ -1,0 +1,43 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:7283955077038062722",
+      "lastPropertyId": "4:7349155394305226173",
+      "name": "DuiLIanData",
+      "properties": [
+        {
+          "id": "1:9014443592246629704",
+          "indexId": "1:97846899022231753",
+          "name": "shanglian"
+        },
+        {
+          "id": "2:1449134035375008441",
+          "name": "xialian"
+        },
+        {
+          "id": "3:5774945936761169426",
+          "name": "hengpi"
+        },
+        {
+          "id": "4:7349155394305226173",
+          "name": "id"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "1:7283955077038062722",
+  "lastIndexId": "1:97846899022231753",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 4,
+  "modelVersionParserMinimum": 4,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}

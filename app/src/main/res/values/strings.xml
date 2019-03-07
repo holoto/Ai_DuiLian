@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">AI对联</string>
+    <string name="shanlianenter">搜索下联</string>
+    <string name="shanlianhit">请输入上联</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

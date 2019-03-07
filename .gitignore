@@ -4,10 +4,12 @@
 
 # Files for the ART/Dalvik VM
 *.dex
+.DS_Store
 
+app/release/
 # Java class files
 *.class
-
+.idea/
 # Generated files
 bin/
 gen/
