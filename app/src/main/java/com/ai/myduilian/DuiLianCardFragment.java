@@ -12,12 +12,16 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ai.myduilian.eventclass.event_settitle;
 import com.ai.myduilian.objectBoxModel.DuiLIanData;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -33,7 +37,6 @@ public class DuiLianCardFragment extends Fragment {
 	// TODO: Customize parameters
 	private int mColumnCount = 1;
 	private OnListFragmentInteractionListener mListener;
-	private Box<DuiLIanData> duiLIanDataBox;
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
 	 * fragment (e.g. upon screen orientation changes).
@@ -75,10 +78,9 @@ public class DuiLianCardFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		duiLIanDataBox=BaseApplication.getBaseApplicationinstance().getBoxStore().boxFor(DuiLIanData.class);
 //		duiLIanDataBox.removeAll();
 		int max=0;
-		if (duiLIanDataBox.getAll().size()==0){
+		if (BaseApplication.getBaseApplicationinstance().getDuiLIanDataBox().getAll().size()==0){
 			 max=1;
 		}
 		for (int i = 0; i < max; i++) {
@@ -87,10 +89,10 @@ public class DuiLianCardFragment extends Fragment {
 			duiLIanData.setHengpi("横批"+getRandomJianHan(5));
 			duiLIanData.setShanglian("上联"+getRandomJianHan(8));
 			duiLIanData.setXialian("下联"+getRandomJianHan(8));
-			duiLIanDataBox.put(duiLIanData);
+			BaseApplication.getBaseApplicationinstance().getDuiLIanDataBox().put(duiLIanData);
 			
 		}
-		List<DuiLIanData> duiLIanDataList=duiLIanDataBox.getAll();
+		List<DuiLIanData> duiLIanDataList=BaseApplication.getBaseApplicationinstance().getDuiLIanDataBox().getAll();
 		Log.e("onCreate", "onCreate: "+duiLIanDataList.size() );
 		Log.e("onCreate", "onCreate: "+duiLIanDataList.get(0) );
 //		Log.e("onCreate", "onCreate: "+duiLIanDataList.get(1111).getId() );
@@ -103,18 +105,26 @@ public class DuiLianCardFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_duiliancard_list, container, false);
-		
+		EventBus.getDefault().post(new event_settitle("list"));
 		// Set the adapter
 		if (view instanceof RecyclerView) {
 			Context context = view.getContext();
 			RecyclerView recyclerView = (RecyclerView) view;
+			List<DuiLIanData> dataList=BaseApplication.getBaseApplicationinstance().getDuiLIanDataBox().getAll();
+			MyDuiLianCardRecyclerViewAdapter myDuiLianCardRecyclerViewAdapter=new MyDuiLianCardRecyclerViewAdapter(dataList, mListener);
+//			MyDuiLianCardRecyclerViewAdapter myDuiLianCardRecyclerViewAdapter=new MyDuiLianCardRecyclerViewAdapter(BaseApplication.getBaseApplicationinstance().getDuiLIanDataBox().getAll(), mListener);
 			if (mColumnCount <= 1) {
 				recyclerView.setLayoutManager(new LinearLayoutManager(context));
 			} else {
 				recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
 			}
 			recyclerView.setItemAnimator(new DefaultItemAnimator());
-			recyclerView.setAdapter(new MyDuiLianCardRecyclerViewAdapter(duiLIanDataBox.getAll(), mListener));
+//			recyclerView.setAdapter(new MyDuiLianCardRecyclerViewAdapter(duiLIanDataBox.getAll(), mListener));
+			recyclerView.setAdapter(myDuiLianCardRecyclerViewAdapter);
+			ItemTouchHelper itemTouchHelper=new ItemTouchHelper(new AppItemTounhHelperCallBack(myDuiLianCardRecyclerViewAdapter,dataList));
+//			ItemTouchHelper itemTouchHelper=new ItemTouchHelper(new AppItemTounhHelperCallBack(myDuiLianCardRecyclerViewAdapter,BaseApplication.getBaseApplicationinstance().getDuiLIanDataBox().getAll()));
+			itemTouchHelper.attachToRecyclerView(recyclerView);
+			
 		}
 		return view;
 	}

@@ -25,7 +25,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.ai.myduilian.Api.staticConfig;
+import com.ai.myduilian.eventclass.event_settitle;
 import com.ai.myduilian.objectBoxModel.DuiLIanData;
+
+import org.greenrobot.eventbus.EventBus;
 
 import io.objectbox.Box;
 
@@ -69,6 +72,7 @@ public class shareduilian extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
+		EventBus.getDefault().post(new event_settitle("share"));
 		View view=inflater.inflate(R.layout.shareduilian, container, false);
 		imageView=(ImageView) view.findViewById(R.id.share_image_canvas);
 //		cardView=(CardView) view.findViewById(R.id.share_cardview);

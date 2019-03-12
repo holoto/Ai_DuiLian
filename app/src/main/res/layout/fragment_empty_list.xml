@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~ Author: holoto
+  ~ Date: 3/12/19 3:40 PM
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".EmptyList">
+<android.support.v7.widget.CardView
+    android:id="@+id/empty_create"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="5dp"
+    android:layout_gravity="center"
+    app:contentPadding="5dp"
+    >
+     <ImageView
+         android:layout_gravity="center"
+         android:src="@drawable/create"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent" />
+</android.support.v7.widget.CardView>
+</FrameLayout>

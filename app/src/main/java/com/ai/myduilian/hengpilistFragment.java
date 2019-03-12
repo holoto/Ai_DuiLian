@@ -60,7 +60,7 @@ public class hengpilistFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_hengpilist_list, container, false);
-		
+		EventBus.getDefault().post(new event_settitle("hengpi"));
 		// Set the adapter
 		if (view instanceof RecyclerView) {
 			Context context = view.getContext();
@@ -78,7 +78,7 @@ public class hengpilistFragment extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		EventBus.getDefault().post(new event_settitle("hengpi"));
+		
 	}
 	
 	@Override

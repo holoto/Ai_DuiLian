@@ -60,6 +60,7 @@ public class xialianFragment extends Fragment {
 	                         Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_xialian_list, container, false);
 		// Set the adapter
+		EventBus.getDefault().post(new event_settitle("xialian"));
 		if (view instanceof RecyclerView) {
 			Context context = view.getContext();
 			RecyclerView recyclerView = (RecyclerView) view;
@@ -77,7 +78,7 @@ public class xialianFragment extends Fragment {
 	public void onResume() {
 		super.onResume();
 		Log.e("onResume", "onResume: " );
-		EventBus.getDefault().post(new event_settitle("xialian"));
+		
 
 	}
 	

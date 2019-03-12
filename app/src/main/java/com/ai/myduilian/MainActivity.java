@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements OnListFragmentInt
 	MainPage mainPage;
 	RadioButton radioButton_create;
 	RadioButton radioButton_list;
+	EmptyList emptyList;
 	private Box<DuiLIanData> duiLIanDataBox;
 	
 	@Nullable
@@ -146,8 +147,9 @@ public class MainActivity extends AppCompatActivity implements OnListFragmentInt
 			shareduilianx= shareduilian.newInstance();
 			duiLianCardFragmentx=DuiLianCardFragment.newInstance();
 			mainPage=MainPage.newInstance();
-			fragmentTransactionx.replace(R.id.maincontainer, mainFragmentx);
-//			fragmentTransactionx.replace(R.id.maincontainer, duiLianCardFragmentx);
+			emptyList=EmptyList.newInstance();
+//			fragmentTransactionx.replace(R.id.maincontainer, mainFragmentx);
+			fragmentTransactionx.replace(R.id.maincontainer, duiLianCardFragmentx);
 //			fragmentTransactionx.replace(R.id.maincontainer, mainPage);
 //			fragmentTransactionx.replace(R.id.maincontainer, duilianCard);
 //			fragmentTransactionx.replace(R.id.maincontainer, duilianCard);
@@ -167,6 +169,7 @@ public class MainActivity extends AppCompatActivity implements OnListFragmentInt
 			shareduilianx=(shareduilian) fragmentManagerx.getFragment(savedInstanceState,"shareduilianx");
 			duiLianCardFragmentx=(DuiLianCardFragment) fragmentManagerx.getFragment(savedInstanceState,"duiLianCardFragmentx");
 			mainPage=(MainPage) fragmentManagerx.getFragment(savedInstanceState,"mainpage");
+			emptyList=(EmptyList) fragmentManagerx.getFragment(savedInstanceState,"emptyList");
 		}
 		fragmentTransactionx.commit();
 		inittapbar();
@@ -216,8 +219,11 @@ public class MainActivity extends AppCompatActivity implements OnListFragmentInt
 				fragmentTransactionx.addToBackStack(null);
 				break;
 			case "card":
-				if (!duiLianCardFragmentx.isAdded()){
+				if (!duiLianCardFragmentx.isAdded()&&BaseApplication.getBaseApplicationinstance().getDuiLIanDataBox().getAll().size()>0){
 					fragmentTransactionx.replace(R.id.maincontainer,duiLianCardFragmentx);
+				
+				}else if (BaseApplication.getBaseApplicationinstance().getDuiLIanDataBox().getAll().size()==0&&!emptyList.isAdded()){
+				fragmentTransactionx.replace(R.id.maincontainer,emptyList);
 				}
 				fragmentTransactionx.addToBackStack(null);
 				break;

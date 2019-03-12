@@ -59,7 +59,7 @@ public class MainFragment extends Fragment
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
-		
+		EventBus.getDefault().post(new event_settitle("shanglian"));
 		return inflater.inflate(R.layout.main_fragment, container, false);
 	}
 	
@@ -240,7 +240,7 @@ public class MainFragment extends Fragment
 	@Override
 	public void onResume() {
 		super.onResume();
-		EventBus.getDefault().post(new event_settitle("1"));
+		
 	}
 	
 

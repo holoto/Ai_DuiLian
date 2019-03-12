@@ -21,7 +21,8 @@ import java.util.List;
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MyDuiLianCardRecyclerViewAdapter extends RecyclerView.Adapter<MyDuiLianCardRecyclerViewAdapter.ViewHolder> {
+public class MyDuiLianCardRecyclerViewAdapter extends RecyclerView.Adapter<MyDuiLianCardRecyclerViewAdapter.ViewHolder>
+{
 	
 	private final List<DuiLIanData> mValues;
 	private final OnListFragmentInteractionListener mListener;

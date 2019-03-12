@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.view.Window;
 
+import com.ai.myduilian.objectBoxModel.DuiLIanData;
 import com.ai.myduilian.objectBoxModel.MyObjectBox;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
@@ -14,6 +15,7 @@ import dev.utils.app.DeviceUtils;
 import dev.utils.app.logger.DevLogger;
 import dev.utils.app.logger.LogConfig;
 import dev.utils.app.logger.LogLevel;
+import io.objectbox.Box;
 import io.objectbox.BoxStore;
 import io.objectbox.android.AndroidObjectBrowser;
 
@@ -24,6 +26,7 @@ public class BaseApplication extends Application {
 	public static final String TAG="duiliandata";
 	public static final boolean EXTRNAL_DIR=false;
 	private  BoxStore boxStore;
+	private Box<DuiLIanData> duiLIanDataBox;
 	private final String LOG_TAG = BaseApplication.class.getSimpleName();
 	
 	@Override
@@ -36,6 +39,7 @@ public class BaseApplication extends Application {
 		// 初始化工具类
 		RxTool.init(this);
 		DevUtils.init(this.getApplicationContext());
+		
 		// == 初始化日志配置 ==
 		// 设置默认Logger配置
 		LogConfig logConfig = new LogConfig();
@@ -48,12 +52,18 @@ public class BaseApplication extends Application {
 		DevUtils.openLog();
 		DevUtils.openDebug();
 		initObjectbox();
+		duiLIanDataBox=getBoxStore().boxFor(DuiLIanData.class);
 		if (BuildConfig.DEBUG){
 			new AndroidObjectBrowser(boxStore).start(this);
 		}
 		
 		
 	}
+	
+	public Box<DuiLIanData> getDuiLIanDataBox() {
+		return duiLIanDataBox;
+	}
+	
 	private void initObjectbox(){
 	boxStore= MyObjectBox.builder().androidContext(contextinstance).build();
 	}
